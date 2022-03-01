@@ -6,7 +6,7 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 // Add and configure workbox plugins for a service worker and manifest file.
   new HtmlWebpackPlugin({
     temple:'./index.html',
-    title: 'Text Editor'
+    title: 'j.a.t.e.'
   }),
   new InjectManifest({
     swSrc: './src-sw.js',
@@ -53,6 +53,10 @@ module.exports = () => {
         {
           test: /\.css$i/,
           user: ['style-loader,','css-loader'],
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
         },
         {
           test: /\.m?js$/,

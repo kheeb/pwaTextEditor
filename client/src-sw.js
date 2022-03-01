@@ -1,5 +1,5 @@
 const { offlineFallback, warmStrategyCache } = require('workbox-recipes');
-const { CacheFirst } = require('workbox-strategies');
+const { CacheFirst, StaleWhileRevalidate } = require('workbox-strategies');
 const { registerRoute } = require('workbox-routing');
 const { CacheableResponsePlugin } = require('workbox-cacheable-response');
 const { ExpirationPlugin } = require('workbox-expiration');
@@ -20,7 +20,7 @@ const pageCache = new CacheFirst({
 });
 
 warmStrategyCache({
-  urls: ['/index.html', '/'],
+  urls: ['/index.html', '/', './assets/icons/icon_96x96.png'],
   strategy: pageCache,
 });
 
@@ -38,3 +38,4 @@ registerRoute(({request}) => ['style', 'script', 'worker'].includes(request.dest
     ],
   }),
 );
+offlineFallback({pageFallback:"index.html"})
